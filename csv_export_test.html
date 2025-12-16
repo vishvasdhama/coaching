@@ -1,0 +1,37 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>CSV Export Test</title>
+  <style>
+    body { font-family: system-ui, Arial; max-width: 800px; margin: 2rem auto; }
+    .btn-small{ padding:0.4rem 0.6rem; font-size:0.9rem; margin-right:0.4rem }
+  </style>
+</head>
+<body>
+  <h2>CSV Export Test Page</h2>
+  <p>This page loads the admin and student scripts from the project and provides quick buttons to trigger CSV export functions. Open DevTools console to see logs if anything goes wrong.</p>
+
+  <h3>Admin exports</h3>
+  <div>
+    <label>Class (leave blank for all): <input id="testAdminClass" placeholder="e.g. 9th"></label>
+    <button class="btn-small" onclick="exportAttendanceCSV(document.getElementById('testAdminClass').value)">Export Attendance (admin)</button>
+    <button class="btn-small" onclick="exportMarksCSV(document.getElementById('testAdminClass').value)">Export Marks (admin)</button>
+  </div>
+
+  <h3>Student exports (uses localStorage.currentStudent)</h3>
+  <div>
+    <button class="btn-small" onclick="exportMyAttendanceCSV()">Export My Attendance (student)</button>
+    <button class="btn-small" onclick="exportMyMarksCSV()">Export My Marks (student)</button>
+  </div>
+
+  <h3>Utilities</h3>
+  <div>
+    <button class="btn-small" onclick="console.log('students', getStudents())">Log students()</button>
+    <button class="btn-small" onclick="console.log('currentStudent', JSON.parse(localStorage.getItem('currentStudent')||'null'))">Log currentStudent</button>
+  </div>
+
+  <script src="js/admin.js"></script>
+  <script src="js/student.js"></script>
+</body>
+</html>

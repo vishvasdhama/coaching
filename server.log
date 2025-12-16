@@ -1,0 +1,16 @@
+Using SQLite database file: /Users/vishvasdhama/Desktop/coaching-center2/server/coaching-center.db
+Simple server running on port 3001
+2025-10-04T04:12:52.687Z - GET /api/students
+2025-10-04T04:12:52.703Z - POST /api/admin/login
+2025-10-04T04:14:04.934Z - POST /api/students/login
+<anonymous_script>:0
+
+
+[Error: SQLITE_ERROR: no such column: lastLogin
+Emitted 'error' event on Statement instance at:
+] {
+  errno: 1,
+  code: 'SQLITE_ERROR'
+}
+
+Node.js v22.20.0

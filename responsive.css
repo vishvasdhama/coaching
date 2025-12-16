@@ -1,0 +1,28 @@
+/* Additional Responsive Styles */
+@media (max-width: 480px) {
+    .container {
+        width: 95%;
+    }
+    
+    .hero {
+        padding: 3rem 0;
+    }
+    
+    .hero-content h2 {
+        font-size: 1.8rem;
+    }
+    
+    .modal-content {
+        margin: 20% auto;
+        padding: 1.5rem;
+    }
+    
+    .dashboard-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    .dashboard-header h2 {
+        margin-bottom: 1rem;
+    }
+}

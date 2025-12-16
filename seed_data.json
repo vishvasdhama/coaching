@@ -1,0 +1,80 @@
+{
+  "admin": {
+    "username": "admin",
+    "password": "admin123"
+  },
+  "students": [
+    {
+      "id": 1001,
+      "name": "Rahul Sharma",
+      "username": "rahul2024",
+      "password": "rahul123",
+      "class": "10th",
+      "phone": "9876543210",
+      "email": "rahul@gmail.com",
+      "address": "123 Main Street, Delhi",
+      "status": "Active",
+      "createdAt": "2024-01-15"
+    },
+    {
+      "id": 1002,
+      "name": "Priya Patel",
+      "username": "priya2024",
+      "password": "priya123",
+      "class": "11th Science",
+      "phone": "9876543211",
+      "email": "priya@gmail.com",
+      "address": "456 Park Avenue, Mumbai",
+      "status": "Active",
+      "createdAt": "2024-01-16"
+    }
+  ],
+  "announcements": [
+    {
+      "id": 1,
+      "title": "Welcome to New Academic Session",
+      "content": "New academic session starts from 1st April 2024. All students are requested to attend the orientation program.",
+      "date": "2024-03-25",
+      "priority": "important"
+    },
+    {
+      "id": 2,
+      "title": "Monthly Test Schedule",
+      "content": "Monthly tests will be conducted from 15th to 20th April 2024. Prepare well!",
+      "date": "2024-03-20",
+      "priority": "normal"
+    }
+  ],
+  "studyMaterials": [
+    {
+      "id": 1,
+      "title": "Mathematics Chapter 1 Notes",
+      "subject": "Mathematics",
+      "class": "10th",
+      "type": "Notes",
+      "description": "Complete notes for Chapter 1 - Real Numbers",
+      "fileName": "math_chapter1_notes.pdf",
+      "fileSize": "2.5 MB",
+      "downloads": 15,
+      "uploadDate": "2024-03-15"
+    },
+    {
+      "id": 2,
+      "title": "Physics Formulas Sheet",
+      "subject": "Physics",
+      "class": "All",
+      "type": "PDF",
+      "description": "Important physics formulas for quick revision",
+      "fileName": "physics_formulas.pdf",
+      "fileSize": "1.2 MB",
+      "downloads": 23,
+      "uploadDate": "2024-03-10"
+    }
+  ],
+  "attendanceRecords": [],
+  "settings": {
+    "lastStudentId": 1002,
+    "lastAnnouncementId": 2,
+    "lastMaterialId": 2
+  }
+}

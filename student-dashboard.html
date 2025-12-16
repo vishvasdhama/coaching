@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Dashboard - SS Classes</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- Student Header -->
+    <header>
+        <div class="container">
+            <div class="logo">
+                <h1>SS Classes - Student Portal</h1>
+            </div>
+            <nav>
+                <ul>
+                    <li><span id="studentWelcome">Welcome, Student</span></li>
+                    <li><button id="logoutBtn" class="btn-login">🚪 Logout</button></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Student Dashboard -->
+    <section class="dashboard">
+        <div class="container">
+            <div class="dashboard-header">
+                <h2>🎓 Student Dashboard</h2>
+                <p id="studentInfo">Welcome to your learning journey!</p>
+                <div id="adminLoginNotice" style="display: none; background: #fff3cd; padding: 1rem; border-radius: 8px; margin-top: 1rem; border-left: 4px solid #ffc107;">
+                    <strong>⚠️ Admin Mode:</strong> You are currently logged in as this student for administrative purposes.
+                </div>
+                <div id="returnToAdminContainer" style="display:none; margin-top:0.75rem;">
+                    <button id="returnToAdminBtn" class="btn-secondary" style="background:#27ae60; color:#fff;">🔙 Return to Admin</button>
+                </div>
+                <div style="display:inline-block; margin-left:1rem;">
+                    <button id="studentRefreshBtn" class="btn-secondary" style="background:#3498db; color:#fff;">🔁 Refresh</button>
+                </div>
+            </div>
+
+            <!-- Student Stats -->
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <h4>📊 Overall Attendance</h4>
+                    <p class="stat-number" id="attendancePercentage">0%</p>
+                    <small>This month</small>
+                </div>
+                <div class="stat-card">
+                    <h4>📚 Total Classes</h4>
+                    <p class="stat-number" id="totalClasses">0</p>
+                    <small>Attended classes</small>
+                </div>
+                <div class="stat-card">
+                    <h4>🏆 Test Average</h4>
+                    <p class="stat-number" id="testAverage">0%</p>
+                    <small>Overall performance</small>
+                </div>
+                <div class="stat-card">
+                    <h4>📅 Days Present</h4>
+                    <p class="stat-number" id="daysPresent">0</p>
+                    <small>This month</small>
+                </div>
+            </div>
+
+            <div class="dashboard-nav">
+                <ul>
+                    <li><a href="#" data-section="profile" class="active">👤 My Profile</a></li>
+                    <li><a href="#" data-section="attendance">📊 My Attendance</a></li>
+                    <li><a href="#" data-section="results">📈 Test Results</a></li>
+                    <li><a href="#" data-section="announcements">📢 Announcements</a></li>
+                    <li><a href="#" data-section="materials">📚 Study Materials</a></li>
+                </ul>
+            </div>
+
+            <!-- Profile Section -->
+            <div id="profile" class="dashboard-section active">
+                <h3>👤 My Profile</h3>
+                <div class="form-container">
+                    <div class="profile-header">
+                        <div class="student-avatar">👨‍🎓</div>
+                        <div>
+                            <h4 id="profileName">Student Name</h4>
+                            <p id="profileClass">Class</p>
+                        </div>
+                    </div>
+                    
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 2rem;">
+                        <div>
+                            <h5>Personal Information</h5>
+                            <div class="info-group">
+                                <label><strong>Student ID:</strong></label>
+                                <span id="infoId">-</span>
+                            </div>
+                            <div class="info-group">
+                                <label><strong>Username:</strong></label>
+                                <span id="infoUsername">-</span>
+                            </div>
+                            <div class="info-group">
+                                <label><strong>Phone:</strong></label>
+                                <span id="infoPhone">-</span>
+                            </div>
+                            <div class="info-group">
+                                <label><strong>Email:</strong></label>
+                                <span id="infoEmail">-</span>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <h5>Academic Information</h5>
+                            <div class="info-group">
+                                <label><strong>Class:</strong></label>
+                                <span id="infoClass">-</span>
+                            </div>
+                            <div class="info-group">
+                                <label><strong>Status:</strong></label>
+                                <span id="infoStatus" class="status-badge active">Active</span>
+                            </div>
+                            <div class="info-group">
+                                <label><strong>Joined On:</strong></label>
+                                <span id="infoJoined">-</span>
+                            </div>
+                            <div class="info-group">
+                                <label><strong>Last Login:</strong></label>
+                                <span id="infoLastLogin">-</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div style="margin-top: 2rem;">
+                        <h5>Address</h5>
+                        <div class="info-group">
+                            <label><strong>Full Address:</strong></label>
+                            <span id="infoAddress">-</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Attendance Section -->
+            <div id="attendance" class="dashboard-section">
+                <h3>📊 My Attendance</h3>
+                <div style="display:flex; gap:0.6rem; margin-bottom:0.75rem; align-items:center;">
+                    <button class="btn-export" onclick="exportMyAttendanceCSV()">Export My Attendance CSV</button>
+                    <button class="btn-export secondary" onclick="exportMyMarksCSV()">Export My Marks CSV</button>
+                </div>
+                
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <h4>🎯 This Month</h4>
+                        <p class="stat-number" id="monthAttendance">0%</p>
+                        <small>Attendance percentage</small>
+                    </div>
+                    <div class="stat-card">
+                        <h4>✅ Present</h4>
+                        <p class="stat-number" id="presentDays">0</p>
+                        <small>Days present</small>
+                    </div>
+                    <div class="stat-card">
+                        <h4>❌ Absent</h4>
+                        <p class="stat-number" id="absentDays">0</p>
+                        <small>Days absent</small>
+                    </div>
+                    <div class="stat-card">
+                        <h4>📅 Total Days</h4>
+                        <p class="stat-number" id="totalDays">0</p>
+                        <small>Working days</small>
+                    </div>
+                </div>
+
+                <div class="table-container">
+                    <h4>📅 Attendance History</h4>
+                    <div style="overflow-x: auto;">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Date</th>
+                                    <th>Day</th>
+                                    <th>Status</th>
+                                    <th>Remarks</th>
+                                </tr>
+                            </thead>
+                            <tbody id="attendanceTableBody">
+                                <!-- Attendance records will be loaded here -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="form-container">
+                    <h4>📈 Attendance Analytics</h4>
+                    <div id="attendanceChart">
+                        <div style="background: #f8f9fa; padding: 2rem; border-radius: 8px; text-align: center;">
+                            <h5>📊 Your Attendance Trend</h5>
+                            <div id="attendanceProgress" style="margin: 1rem 0;">
+                                <!-- Attendance progress bars will be shown here -->
+                            </div>
+                            <small>This shows your attendance pattern over time</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Test Results Section -->
+            <div id="results" class="dashboard-section">
+                <h3>📈 Test Results</h3>
+                <div style="display:flex; justify-content:flex-end; margin-bottom:0.75rem;">
+                    <button class="btn-export" onclick="exportMyMarksCSV()">Export My Marks CSV</button>
+                </div>
+                
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <h4>📝 Total Tests</h4>
+                        <p class="stat-number" id="totalTests">0</p>
+                        <small>Tests taken</small>
+                    </div>
+                    <div class="stat-card">
+                        <h4>🏆 Average Score</h4>
+                        <p class="stat-number" id="averageScore">0%</p>
+                        <small>Overall average</small>
+                    </div>
+                    <div class="stat-card">
+                        <h4>📈 Highest Score</h4>
+                        <p class="stat-number" id="highestScore">0%</p>
+                        <small>Best performance</small>
+                    </div>
+                    <div class="stat-card">
+                        <h4>🎯 Improvement</h4>
+                        <p class="stat-number" id="improvement">+0%</p>
+                        <small>Since last month</small>
+                    </div>
+                </div>
+
+                <div class="table-container">
+                    <h4>📋 Test History</h4>
+                    <div style="overflow-x: auto;">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Test Name</th>
+                                    <th>Subject</th>
+                                    <th>Date</th>
+                                    <th>Marks</th>
+                                    <th>Percentage</th>
+                                    <th>Grade</th>
+                                </tr>
+                            </thead>
+                            <tbody id="testResultsTableBody">
+                                <!-- Test results will be loaded here -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="form-container">
+                    <h4>📊 Performance Analysis</h4>
+                    <div id="performanceChart">
+                        <p>Performance analysis chart will be displayed here.</p>
+                        <div style="background: #f8f9fa; padding: 2rem; border-radius: 8px; text-align: center;">
+                            <p>📈 Visual performance analytics coming soon!</p>
+                            <small>This will show your progress across different subjects</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Announcements Section -->
+            <div id="announcements" class="dashboard-section">
+                <h3>📢 Announcements</h3>
+                
+                <div class="table-container">
+                    <h4>📋 Latest Announcements</h4>
+                    <div id="studentAnnouncementList">
+                        <!-- Announcements will be loaded here -->
+                    </div>
+                </div>
+
+                <div class="form-container">
+                    <h4>📅 Important Dates</h4>
+                    <div class="important-dates" id="importantDatesList">
+                        <!-- Important dates will be loaded dynamically -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Study Materials Section -->
+            <div id="materials" class="dashboard-section">
+                <h3>📚 Study Materials</h3>
+                
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <h4>📖 Notes</h4>
+                        <p class="stat-number" id="notesCount">0</p>
+                        <small>Available notes</small>
+                    </div>
+                    <div class="stat-card">
+                        <h4>📄 PDFs</h4>
+                        <p class="stat-number" id="pdfsCount">0</p>
+                        <small>Study materials</small>
+                    </div>
+                    <div class="stat-card">
+                        <h4>🎥 Videos</h4>
+                        <p class="stat-number" id="videosCount">0</p>
+                        <small>Lecture recordings</small>
+                    </div>
+                    <div class="stat-card">
+                        <h4>📝 Assignments</h4>
+                        <p class="stat-number" id="assignmentsCount">0</p>
+                        <small>Pending work</small>
+                    </div>
+                </div>
+
+                <div class="table-container">
+                    <h4>📋 Available Materials</h4>
+                    <div class="materials-grid" id="materialsGrid">
+                        <!-- Materials will be loaded here -->
+                    </div>
+                </div>
+
+                <div class="form-container">
+                    <h4>📅 Study Schedule</h4>
+                    <div class="schedule" id="studyScheduleContainer">
+                        <!-- Study schedule will be loaded dynamically from admin -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script src="js/student.js"></script>
+</body>
+</html>

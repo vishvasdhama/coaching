@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>xyz Classes  | Best Coaching in Delhi</title>
+    <link rel="stylesheet" href="css/style.css">
+    <meta name="description" content="xyz Classes - Premium coaching center with experienced faculty. Best results in board exams and competitive exams. Join now for quality education.">
+</head>
+<body>
+    <!-- Header Section -->
+    <header>
+        <div class="container">
+            <div class="logo">
+                <h1>🏆 xyz Classes</h1>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#about">About Us</a></li>
+                    <li><a href="#courses">Courses</a></li>
+                    <li><a href="#teachers">Our Teachers</a></li>
+                    <li><a href="#students">Top Students</a></li>
+                    <li><a href="#results">Results</a></li>
+                    <li><a href="#announcements">Announcements</a></li>
+                    <li><button id="loginBtn" class="btn-login">🎯 Student Login</button></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-badge">🏆 Best Coaching Center 2025</div>
+                <h1>Welcome to <span style="color: #f39c12;">xyz Classes</span></h1>
+                <h2>Where Excellence Meets Education</h2>
+                <p>Premium coaching with 15+ years of experience producing top rankers in board exams and competitive exams</p>
+                <div class="hero-stats">
+                    <div class="stat">
+                        <h3>2000+</h3>
+                        <p>Successful Students</p>
+                    </div>
+                    <div class="stat">
+                        <h3>15+</h3>
+                        <p>Years Experience</p>
+                    </div>
+                    <div class="stat">
+                        <h3>98%</h3>
+                        <p>Success Rate</p>
+                    </div>
+                </div>
+                <div class="hero-buttons">
+                    <button class="btn-primary" onclick="scrollToSection('courses')">📚 Explore Courses</button>
+                    <button class="btn-secondary" onclick="scrollToSection('announcements')">🎯 Enroll Now</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about">
+        <div class="container">
+            <h2>About <span style="color: #f39c12;">xyz Classes</span></h2>
+            <div class="about-content">
+                <div class="about-text">
+                    <p>🏆 <strong>xyz Classes</strong> is a premier coaching institute established in 2018 with a vision to provide quality education and shape the future of students. With over 15 years of experience, we have helped thousands of students achieve their academic dreams.</p>
+                    
+                    <div class="features-grid">
+                        <div class="feature">
+                            <span class="feature-icon">🎯</span>
+                            <h4>Expert Faculty</h4>
+                            <p>Learn from 10/12 alumni and experienced educators</p>
+                        </div>
+                        <div class="feature">
+                            <span class="feature-icon">📚</span>
+                            <h4>Study Materials</h4>
+                            <p>Comprehensive notes and practice materials</p>
+                        </div>
+                        <div class="feature">
+                            <span class="feature-icon">📊</span>
+                            <h4>Regular Tests</h4>
+                            <p>Weekly tests and performance analysis</p>
+                        </div>
+                        <div class="feature">
+                            <span class="feature-icon">👨‍🏫</span>
+                            <h4>Doubt Sessions</h4>
+                            <p>Regular doubt clearing sessions</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Courses Section -->
+    <section id="courses" class="courses">
+        <div class="container">
+            <h2>Our <span style="color: #f39c12;">Premium Courses</span></h2>
+            <div class="courses-grid">
+                <div class="course-card">
+                    <div class="course-icon">🔢</div>
+                    <h3>9th-10th Foundation</h3>
+                    <p>Strong foundation for CBSE/ICSE boards</p>
+                    <ul>
+                        <li>Mathematics</li>
+                        <li>Science</li>
+                        
+                    </ul>
+                    <div class="course-duration">📅 1 Year Program</div>
+                </div>
+                <div class="course-card">
+                    <div class="course-icon">⚛️</div>
+                    <h3>11th-12th Science</h3>
+                    <p>PCM for UP BOARD/CBSE</p>
+                    <ul>
+                        <li>Physics</li>
+                        <li>Chemistry</li>
+                        <li>Mathematics</li>
+                        <li>English</li>
+                    </ul>
+                    <div class="course-duration">📅 1 Year Program</div>
+                </div>
+                <div class="course-card">
+                    <div class="course-icon">🏆</div>
+                    <h3>Extra Coaching</h3>
+                    <p>Specialized coaching for Board Exam</p>
+                    <ul>
+                        
+                        <li>Msths</li>
+                        <li>Physics Fundamentals</li>
+                        <li>Board Exams</li>
+                    </ul>
+                    <div class="course-duration">📅 Crash Courses Available</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Announcements Section -->
+    <section id="announcements" class="announcements">
+        <div class="container">
+            <h2>📢 Latest <span style="color: #f39c12;">Announcements</span></h2>
+            <div class="announcement-list" id="announcementList">
+                <!-- Announcements will be loaded here -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Teachers Section -->
+    <section id="teachers" class="teachers">
+        <div class="container">
+            <h2>Meet Our <span style="color: #f39c12;">Expert Faculty</span></h2>
+            <div class="teacher-grid">
+                <div class="teacher-card">
+                    
+                    <div class="teacher-img">
+                        <img src="images/teacher1.jpg" alt=" ">
+                     </div>
+                     <h3>xyz</h3>
+                    <p class="subject">Mathematics Expert</p>
+                    <p class="qualification"> 18+ Years Experience</p>
+                    <p class="achievement">🎯 1000+ Topped Board Exam</p>
+                    <p class="specialty">Specialized in Calculus & Algebra</p>
+                </div>
+                <div class="teacher-card">
+                    <div class="teacher-img">
+                        <img src="images/teacher2.jpg" alt="  ">
+                    </div>
+                    <h3> xyz</h3>
+                    <p class="subject">All subject Specialist</p>
+                    <p class="qualification">1st to 8th Class</p>
+                    <!-- <p class="achievement">🎯 800+ Have been Read </p> -->
+                    <p class="specialty">Expert in Math and Science</p>
+                </div>
+                <!-- <div class="teacher-card">
+                    <div class="teacher-img">👨‍🏫</div>
+                    <h3>Dr. Rajesh Kumar</h3>
+                    <p class="subject">Chemistry Guru</p>
+                    <p class="qualification">PhD (Chemistry), 12+ Years Experience</p>
+                    <p class="achievement">🎯 750+ JEE/NEET Selections</p>
+                    <p class="specialty">Organic Chemistry Expert</p>
+                </div> -->
+                <!-- <div class="teacher-card">
+                    <div class="teacher-img">👩‍🏫</div>
+                    <h3>Priya Singh</h3>
+                    <p class="subject">Biology Mentor</p>
+                    <p class="qualification">M.Sc (Biotechnology), 10+ Years Experience</p>
+                    <p class="achievement">🎯 600+ NEET Selections</p>
+                    <p class="specialty">Human Physiology Specialist</p>
+                </div> -->
+            </div>
+        </div>
+    </section>
+    
+
+    <!-- Top Students Section -->
+    <section id="students" class="students">
+    <div class="container">
+        <h2>Our <span style="color: #f39c12;">Achievers</span></h2>
+        <div class="student-grid">
+            <div class="student-card">
+                <div class="student-img">
+                    <img src="images/vishvas.jpg" alt="  ">
+                </div>
+                <h3>xyz </h3>
+                <p class="achievement">🎯 94% in UP Board 10th</p>
+                <p class="achievement">🎯 89% in UP Board 12th</p>
+                <!-- <p class="selection">Exam for: Up Board</p> -->
+                <p class="rank">JEE Advanced Rank:856</p>
+                <p class="batch">xyz Classes Batch: 2022-23</p>
+            </div>
+            <div class="student-card">
+                <div class="student-img">
+                    <img src="images/yashie.jpg" alt=" ">
+                </div>
+                <h3>xyz </h3>
+                <p class="achievement">🎯 98.9% in CBSE 12th</p>
+                <p class="achievement">🎯 97.8% in CBSE 12th</p>
+                <p class="selection">Selected for: AIIMS Delhi</p>
+                <p class="rank">JEE Rank: 556</p>
+                <p class="batch">xyz Classes Batch: 2022-23</p>
+            </div>
+            <div class="student-card">
+                <div class="student-img">
+                    <img src="images/ishu.jpg" alt=" ">
+                </div>
+                <h3>xyz</h3>
+                <p class="achievement">🎯 91.2% in CBSE 10th</p>
+                <!-- <p class="selection">Selected for: IIT Delhi</p>
+                <p class="rank">JEE Advanced Rank: 89</p> -->
+                <p class="batch">xyz Classes Batch: 2022-24</p>
+            </div>
+            <!-- <div class="student-card">
+                <div class="student-img">
+                    <img src="images/anjali.jpg" alt="Anjali Singh">
+                </div>
+                <h3>Anjali Singh</h3>
+                <p class="achievement">🎯 96.4% in CBSE 12th</p>
+                <p class="selection">Selected for: NIT Surat</p>
+                <p class="rank">JEE Mains: 99.2 percentile</p>
+                <p class="batch">SS Classes Batch: 2021-23</p>
+            </div> -->
+        </div>
+    </div>
+</section>
+
+<style>
+.students {
+    padding: 60px 0;
+    background-color: #f8f9fa;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.students h2 {
+    text-align: center;
+    margin-bottom: 40px;
+    font-size: 2.5rem;
+    color: #333;
+}
+
+.student-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+}
+
+.student-card {
+    background: white;
+    border-radius: 10px;
+    padding: 25px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    transition: transform 0.3s ease;
+}
+
+.student-card:hover {
+    transform: translateY(-5px);
+}
+
+.student-img {
+    width: 120px;
+    height: 120px;
+    margin: 0 auto 20px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 3px solid #f39c12;
+}
+
+.student-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.student-card h3 {
+    margin-bottom: 10px;
+    color: #333;
+    font-size: 1.4rem;
+}
+
+.student-card p {
+    margin: 8px 0;
+    color: #555;
+}
+
+.achievement {
+    font-weight: bold;
+    color: #f39c12 !important;
+}
+
+.selection {
+    color: #2c3e50;
+    font-weight: 600;
+}
+
+.rank {
+    color: #27ae60;
+}
+
+.batch {
+    color: #7f8c8d;
+    font-style: italic;
+}
+</style>
+
+    <!-- Results Section -->
+    <section id="results" class="results">
+        <div class="container">
+            <h2>Our <span style="color: #f39c12;">Outstanding Results</span></h2>
+            <div class="results-stats">
+                <div class="result-stat">
+                    <h3>150+</h3>
+                    <p>Up board Topper</p>
+                </div>
+                <div class="result-stat">
+                    <h3>180+</h3>
+                    <p>CBSE Topper</p>
+                </div>
+                <div class="result-stat">
+                    <h3>100+</h3>
+                    <p>icse Topper</p>
+                </div>
+                <div class="result-stat">
+                    <h3>98%</h3>
+                    <p>Board Success Rate</p>
+                </div>
+            </div>
+            <div class="results-highlights">
+                <h3>🎯 Recent Achievements (2023-24)</h3>
+                <ul>
+                    <li>🏆 15 Students Topped in Up board </li>
+                    <li>🏆 12 Students Topped in CBSE board</li>
+                    <li>🏆 28 Students scored 90%+ in CBSE 12th</li>
+                    <li>🏆 35 Students scored 90%+ in CBSE 10th</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <div class="container">
+            <h2>Get In <span style="color: #f39c12;">Touch</span></h2>
+            <div class="contact-info">
+                <div class="contact-item">
+                    <span class="contact-icon">📍</span>
+                    <div>
+                        <h4>Address</h4>
+                        <p> xyz</p>
+                    </div>
+                </div>
+                <div class="contact-item">
+                    <span class="contact-icon">📞</span>
+                    <div>
+                        <h4>Phone</h4>
+                        <p>+91 9999999999</p>
+                    </div>
+                </div>
+                <div class="contact-item">
+                    <span class="contact-icon">📧</span>
+                    <div>
+                        <h4>Email</h4>
+                        <p>xyz@gmail.com<br>xyz@gmail.com</p>
+                    </div>
+                </div>
+                <div class="contact-item">
+                    <span class="contact-icon">🕒</span>
+                    <div>
+                        <h4> Meeting Timing</h4>
+                        <p>Tuesday: 3 PM - 8 PM<br>Sunday: 10 AM - 2 PM</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Login Modal -->
+    <div id="loginModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>🎯 Login to xyz Classes</h2>
+            <form id="loginForm">
+                <div class="form-group">
+                    <label for="userType">Login As:</label>
+                    <select id="userType" required>
+                        <!-- <option value="">Select User Type</option> -->
+                        <option value="student">🎓 Student</option>
+                        <option value="admin">👨‍💼 Admin</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="username">👤 Username:</label>
+                    <input type="text" id="username" required placeholder="Enter your username">
+                </div>
+                <div class="form-group">
+                    <label for="password">🔑 Password:</label>
+                    <input type="password" id="password" required placeholder="Enter your password">
+                </div>
+                <button type="submit" class="btn-primary">🚀 Login to Dashboard</button>
+            </form>
+            <div id="loginMessage" class="message"></div>
+            <!-- <div class="demo-credentials"> -->
+                <!-- <h4>🔐 Demo Credentials:</h4>
+                <p><strong>👨‍💼 Admin:</strong> username: admin, password: admin123</p>
+                <p><strong>🎓 Student:</strong> Create student first from admin panel</p> -->
+            <!-- </div> -->
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>🏆 xyz Classes</h3>
+                    <p>Coaching Center</p>
+                    <p>Shaping futures since 2018</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#courses">Courses</a></li>
+                        <li><a href="#teachers">Faculty</a></li>
+                        <li><a href="#results">Results</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Contact Info</h4>
+                    <p>📞 +91 99999 9999</p>
+                    <p>📧 xyz@gmail.com</p>
+                    <p>📍 xyz</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Follow Us</h4>
+                    <p>📘 Facebook</p>
+                    <p>📷 Instagram</p>
+                    <p>🐦 Twitter</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 xyz Classes. All rights reserved. | Coaching Center</p>
+                <p>🏆 Best Coaching Center Award 2023-24</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Database Script -->
+    <script src="js/db.js"></script>
+    <script src="js/script.js"></script>
+</body>
+</html>

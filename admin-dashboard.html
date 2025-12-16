@@ -1,0 +1,796 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - SS Classes</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    
+    <!-- Admin Header -->
+    <header>
+        <div class="container">
+            <div class="logo">
+                <h1>SS Classes - Admin Panel</h1>
+            </div>
+            <nav>
+                <ul>
+                    <li><button id="studentLoginBtn" class="btn-login" style="background: #27ae60;">🔐 Student Login</button></li>
+                    <li><button id="logoutBtn" class="btn-login">🚪 Logout</button></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Admin Dashboard -->
+    <section class="dashboard">
+        <div class="container">
+            <div class="dashboard-header">
+                <h2>🎯 Admin Dashboard</h2>
+                <p>Welcome, Admin! You have full control over the coaching center</p>
+            </div>
+
+            <!-- Quick Stats -->
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <h4>👥 Total Students</h4>
+                    <p class="stat-number" id="totalStudents">0</p>
+                    <small>Registered students</small>
+                </div>
+                <div class="stat-card">
+                    <h4>📢 Active Announcements</h4>
+                    <p class="stat-number" id="totalAnnouncements">0</p>
+                    <small>Current announcements</small>
+                </div>
+                <div class="stat-card">
+                    <h4>📅 Today's Date</h4>
+                    <p class="stat-number" id="todayDate">-</p>
+                    <small id="currentTime">-</small>
+                </div>
+                <div class="stat-card">
+                    <h4>✅ Active Logins</h4>
+                    <p class="stat-number" id="activeLogins">0</p>
+                    <small>Student logins today</small>
+                </div>
+            </div>
+
+            <div class="dashboard-nav">
+                <ul>
+                    <li><a href="#" data-section="students" class="active">👨‍🎓 Manage Students</a></li>
+                    <li><a href="#" data-section="announcements">📢 Manage Announcements</a></li>
+                    <li><a href="#" data-section="attendance">📊 Attendance</a></li>
+                    <li><a href="#" data-section="marks">📝 Marks Management</a></li>
+                    <li><a href="#" data-section="importantDates">📅 Important Dates</a></li>
+                    <li><a href="#" data-section="studySchedule">⏰ Study Schedule</a></li>
+                    <li><a href="#" data-section="studentLogin">🔐 Login as Student</a></li>
+                    <li><a href="#" data-section="materials">📚 Study Materials</a></li>
+                    <li><a href="#" data-section="reports">📈 Reports</a></li>
+                </ul>
+            </div>
+
+            <!-- Students Section -->
+            <div id="students" class="dashboard-section active">
+                <h3>👨‍🎓 Student Management</h3>
+                
+                <div class="form-container">
+                    <h4>➕ Create New Student ID</h4>
+                    <form id="addStudentForm">
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                            <div class="form-group">
+                                <label for="studentName">📛 Full Name:</label>
+                                <input type="text" id="studentName" required placeholder="Enter full name">
+                            </div>
+                            <div class="form-group">
+                                <label for="studentClass">🏫 Class:</label>
+                                <select id="studentClass" required>
+                                    <option value="">Select Class</option>
+                                    <option value="9th">9th Grade</option>
+                                    <option value="10th">10th Grade</option>
+                                    <option value="11th Science">11th Science</option>
+                                    <option value="11th Commerce">11th Commerce</option>
+                                    <option value="12th Science">12th Science</option>
+                                    <option value="12th Commerce">12th Commerce</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                            <div class="form-group">
+                                <label for="studentUsername">👤 Username:</label>
+                                <input type="text" id="studentUsername" required placeholder="Choose username">
+                                <small>Username must be unique</small>
+                            </div>
+                            <div class="form-group">
+                                <label for="studentPassword">🔑 Password:</label>
+                                <input type="password" id="studentPassword" required placeholder="Enter password">
+                                <small>Minimum 6 characters</small>
+                            </div>
+                        </div>
+
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                            <div class="form-group">
+                                <label for="studentPhone">📞 Phone Number:</label>
+                                <input type="tel" id="studentPhone" pattern="[0-9]{10}" placeholder="10-digit number">
+                            </div>
+                            <div class="form-group">
+                                <label for="studentEmail">📧 Email:</label>
+                                <input type="email" id="studentEmail" placeholder="student@example.com">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="studentAddress">🏠 Address:</label>
+                            <textarea id="studentAddress" rows="2" placeholder="Full residential address"></textarea>
+                        </div>
+
+                        <div style="display: flex; gap: 1rem; margin-top: 1rem; flex-wrap: wrap;">
+                            <button type="submit" class="btn-primary">✅ Create Student ID</button>
+                            <button type="button" class="btn-secondary" onclick="generateCredentials()">🎲 Auto Generate</button>
+                            <button type="reset" class="btn-secondary" style="background: #6c757d;">🗑️ Clear Form</button>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- Student List -->
+                <div class="table-container">
+                    <h4>📋 All Students</h4>
+                    <div class="search-box">
+                        <input type="text" id="searchStudent" placeholder="🔍 Search students by name, class, or username..." onkeyup="searchStudents()">
+                    </div>
+                    <div style="overflow-x: auto;">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Name</th>
+                                    <th>Class</th>
+                                    <th>Username</th>
+                                    <th>Phone</th>
+                                    <th>Status</th>
+                                    <th>Actions</th>
+                                    <th>Attendance</th>
+                                </tr>
+                            </thead>
+                            <tbody id="studentTableBody">
+                                <!-- Students will be loaded here -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Announcements Section -->
+            <div id="announcements" class="dashboard-section">
+                <h3>📢 Announcement Management</h3>
+                
+                <div class="form-container">
+                    <h4>➕ Create New Announcement</h4>
+                    <form id="addAnnouncementForm">
+                        <div class="form-group">
+                            <label for="announcementTitle">📛 Title:</label>
+                            <input type="text" id="announcementTitle" required placeholder="Enter announcement title">
+                        </div>
+                        <div class="form-group">
+                            <label for="announcementContent">📝 Content:</label>
+                            <textarea id="announcementContent" rows="4" required placeholder="Enter announcement details"></textarea>
+                        </div>
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                            <div class="form-group">
+                                <label for="announcementDate">📅 Date:</label>
+                                <input type="date" id="announcementDate" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="announcementPriority">🚨 Priority:</label>
+                                <select id="announcementPriority">
+                                    <option value="normal">🟢 Normal</option>
+                                    <option value="important">🟡 Important</option>
+                                    <option value="urgent">🔴 Urgent</option>
+                                </select>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn-primary">✅ Add Announcement</button>
+                    </form>
+                </div>
+
+                <div class="table-container">
+                    <h4>📋 All Announcements</h4>
+                    <div class="search-box">
+                        <input type="text" id="searchAnnouncement" placeholder="🔍 Search announcements..." onkeyup="searchAnnouncements()">
+                    </div>
+                    <div style="overflow-x: auto;">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Title</th>
+                                    <th>Content</th>
+                                    <th>Date</th>
+                                    <th>Priority</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="announcementTableBody">
+                                <!-- Announcements will be loaded here -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Attendance Section -->
+            <div id="attendance" class="dashboard-section">
+                <h3>📊 Attendance Management</h3>
+                
+                <div class="form-container">
+                    <h4>📝 Mark Attendance</h4>
+                    <form id="markAttendanceForm">
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                            <div class="form-group">
+                                <label for="attendanceDate">📅 Date:</label>
+                                <input type="date" id="attendanceDate" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="attendanceClass">🏫 Class:</label>
+                                <select id="attendanceClass" required onchange="loadStudentsForAttendance()">
+                                    <option value="">Select Class</option>
+                                    <option value="9th">9th Grade</option>
+                                    <option value="10th">10th Grade</option>
+                                    <option value="11th Science">11th Science</option>
+                                    <option value="11th Commerce">11th Commerce</option>
+                                    <option value="12th Science">12th Science</option>
+                                    <option value="12th Commerce">12th Commerce</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div id="attendanceStudentsList" style="max-height: 400px; overflow-y: auto;">
+                            <!-- Students list for attendance will be loaded here -->
+                        </div>
+                        
+                        <button type="submit" class="btn-primary" style="margin-top: 1rem;">✅ Submit Attendance</button>
+                    </form>
+                </div>
+
+                <div class="table-container">
+                    <h4>📈 Attendance Records</h4>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem;">
+                        <select id="attendanceFilterClass" onchange="loadAttendanceRecords()">
+                            <option value="">All Classes</option>
+                            <option value="9th">9th Grade</option>
+                            <option value="10th">10th Grade</option>
+                            <option value="11th Science">11th Science</option>
+                            <option value="11th Commerce">11th Commerce</option>
+                            <option value="12th Science">12th Science</option>
+                            <option value="12th Commerce">12th Commerce</option>
+                        </select>
+                        <input type="month" id="attendanceFilterMonth" onchange="loadAttendanceRecords()">
+                        <button class="btn-export" onclick="exportAttendanceCSV(document.getElementById('attendanceFilterClass').value)">Export Attendance </button>
+                    </div>
+                    <div style="overflow-x: auto;">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Date</th>
+                                    <th>Class</th>
+                                    <th>Present</th>
+                                    <th>Absent</th>
+                                    <th>Total</th>
+                                    <th>Percentage</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="attendanceRecordsBody">
+                                <!-- Attendance records will be loaded here -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Marks Management Section -->
+            <div id="marks" class="dashboard-section">
+                <h3>📝 Marks Management</h3>
+                
+                <div class="form-container">
+                    <h4>➕ Add Test Results</h4>
+                    <form id="addMarksForm">
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                            <div class="form-group">
+                                <label for="testName">📝 Test Name:</label>
+                                <input type="text" id="testName" required placeholder="e.g., Monthly Test, Unit Test">
+                            </div>
+                            <div class="form-group">
+                                <label for="testSubject">📚 Subject:</label>
+                                <select id="testSubject" required>
+                                    <option value="">Select Subject</option>
+                                    <option value="Mathematics">Mathematics</option>
+                                    <option value="Physics">Physics</option>
+                                    <option value="Chemistry">Chemistry</option>
+                                    <option value="Biology">Biology</option>
+                                    <option value="English">English</option>
+                                    <option value="Hindi">Hindi</option>
+                                    <option value="Social Science">Social Science</option>
+                                </select>
+                            </div>
+                        </div>
+                        <!-- Marks CSV export moved to the top of the Marks Management section for visibility -->
+                        <div style="margin-top:0.5rem; display:flex; gap:0.5rem; align-items:center;">
+                            <button type="button" class="btn-export" onclick="exportMarksCSV(document.getElementById('marksFilterClass') ? document.getElementById('marksFilterClass').value : '')">Export Marks </button>
+                        </div>
+                        
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                            <div class="form-group">
+                                <label for="testDate">📅 Test Date:</label>
+                                <input type="date" id="testDate" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="testTotalMarks">🎯 Total Marks:</label>
+                                <input type="number" id="testTotalMarks" required placeholder="100" min="1" value="100">
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="testClass">🏫 Select Class:</label>
+                            <select id="testClass" required onchange="loadStudentsForMarks()">
+                                <option value="">Select Class</option>
+                                <option value="9th">9th Grade</option>
+                                <option value="10th">10th Grade</option>
+                                <option value="11th Science">11th Science</option>
+                                <option value="11th Commerce">11th Commerce</option>
+                                <option value="12th Science">12th Science</option>
+                                <option value="12th Commerce">12th Commerce</option>
+                            </select>
+                        </div>
+                        
+                        <div id="marksStudentsList" style="max-height: 400px; overflow-y: auto; margin-top: 1rem;">
+                            <!-- Students list for marks will be loaded here -->
+                            <p style="text-align: center; padding: 2rem; color: #666;">
+                                Please select a class to load students
+                            </p>
+                        </div>
+                        
+                        <button type="submit" class="btn-primary" style="margin-top: 1rem;">✅ Submit Marks</button>
+                    </form>
+                </div>
+
+                <div class="table-container">
+                    <h4>📋 All Test Results</h4>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1rem; margin-bottom: 1rem;">
+                        <select id="marksFilterClass" onchange="loadAllTestResults()">
+                            <option value="">All Classes</option>
+                            <option value="9th">9th Grade</option>
+                            <option value="10th">10th Grade</option>
+                            <option value="11th Science">11th Science</option>
+                            <option value="11th Commerce">11th Commerce</option>
+                            <option value="12th Science">12th Science</option>
+                            <option value="12th Commerce">12th Commerce</option>
+                        </select>
+                        <select id="marksFilterSubject" onchange="loadAllTestResults()">
+                            <option value="">All Subjects</option>
+                            <option value="Mathematics">Mathematics</option>
+                            <option value="Physics">Physics</option>
+                            <option value="Chemistry">Chemistry</option>
+                            <option value="Biology">Biology</option>
+                            <option value="English">English</option>
+                            <option value="Hindi">Hindi</option>
+                            <option value="Social Science">Social Science</option>
+                        </select>
+                        <input type="month" id="marksFilterMonth" onchange="loadAllTestResults()">
+                    </div>
+                    <div style="overflow-x: auto;">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Test Name</th>
+                                    <th>Subject</th>
+                                    <th>Class</th>
+                                    <th>Date</th>
+                                    <th>Total Students</th>
+                                    <th>Average %</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="testResultsBody">
+                                <!-- Test results will be loaded here -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Important Dates Section -->
+            <div id="importantDates" class="dashboard-section">
+                <h3>📅 Important Dates Management</h3>
+                
+                <div class="form-container">
+                    <h4>➕ Add Important Date</h4>
+                    <form id="addImportantDateForm">
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                            <div class="form-group">
+                                <label for="dateTitle">📛 Title:</label>
+                                <input type="text" id="dateTitle" required placeholder="e.g., Monthly Test, Parent-Teacher Meeting">
+                            </div>
+                            <div class="form-group">
+                                <label for="dateDate">📅 Date:</label>
+                                <input type="date" id="dateDate" required>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="dateDescription">📝 Description:</label>
+                            <textarea id="dateDescription" rows="3" required placeholder="Details about the event..."></textarea>
+                        </div>
+                        
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                            <div class="form-group">
+                                <label for="dateType">🎯 Event Type:</label>
+                                <select id="dateType" required>
+                                    <option value="">Select Type</option>
+                                    <option value="test">📝 Test/Exam</option>
+                                    <option value="meeting">👥 Meeting</option>
+                                    <option value="holiday">🎉 Holiday</option>
+                                    <option value="deadline">⏰ Deadline</option>
+                                    <option value="event">🎊 Event</option>
+                                    <option value="other">❓ Other</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="datePriority">🚨 Priority:</label>
+                                <select id="datePriority">
+                                    <option value="normal">🟢 Normal</option>
+                                    <option value="important">🟡 Important</option>
+                                    <option value="urgent">🔴 Urgent</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <button type="submit" class="btn-primary">✅ Add Important Date</button>
+                    </form>
+                </div>
+
+                <div class="table-container">
+                    <h4>📋 Upcoming Important Dates</h4>
+                    <div class="search-box">
+                        <input type="text" id="searchDates" placeholder="🔍 Search important dates..." onkeyup="searchImportantDates()">
+                    </div>
+                    <div style="overflow-x: auto;">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Date</th>
+                                    <th>Title</th>
+                                    <th>Description</th>
+                                    <th>Type</th>
+                                    <th>Priority</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="importantDatesTableBody">
+                                <!-- Important dates will be loaded here -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="form-container">
+                    <h4>📊 Important Dates Overview</h4>
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <h4>📅 This Month</h4>
+                            <p class="stat-number" id="datesThisMonth">0</p>
+                            <small>Upcoming events</small>
+                        </div>
+                        <div class="stat-card">
+                            <h4>📝 Tests</h4>
+                            <p class="stat-number" id="testDatesCount">0</p>
+                            <small>Scheduled tests</small>
+                        </div>
+                        <div class="stat-card">
+                            <h4>👥 Meetings</h4>
+                            <p class="stat-number" id="meetingDatesCount">0</p>
+                            <small>Parent-teacher meetings</small>
+                        </div>
+                        <div class="stat-card">
+                            <h4>🎉 Holidays</h4>
+                            <p class="stat-number" id="holidayDatesCount">0</p>
+                            <small>Upcoming holidays</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Study Schedule Management Section -->
+            <div id="studySchedule" class="dashboard-section">
+                <h3>⏰ Study Schedule Management</h3>
+                
+                <div class="form-container">
+                    <h4>📝 Edit Study Schedule</h4>
+                    <form id="studyScheduleForm">
+                        <div class="form-group">
+                            <label for="scheduleClass">🏫 Select Class:</label>
+                            <select id="scheduleClass" required onchange="loadStudySchedule()">
+                                <option value="">Select Class</option>
+                                <option value="9th">9th Grade</option>
+                                <option value="10th">10th Grade</option>
+                                <option value="11th Science">11th Science</option>
+                                <option value="11th Commerce">11th Commerce</option>
+                                <option value="12th Science">12th Science</option>
+                                <option value="12th Commerce">12th Commerce</option>
+                            </select>
+                        </div>
+                        
+                        <div id="scheduleDaysContainer" style="margin-top: 1rem;">
+                            <!-- Schedule days will be loaded here -->
+                            <p style="text-align: center; color: #666; padding: 2rem;">
+                                Please select a class to edit schedule
+                            </p>
+                        </div>
+                        
+                        <button type="submit" class="btn-primary" style="margin-top: 1rem;">✅ Save Schedule</button>
+                    </form>
+                </div>
+
+                <div class="table-container">
+                    <h4>📋 Current Study Schedules</h4>
+                    <div class="search-box">
+                        <input type="text" id="searchSchedule" placeholder="🔍 Search schedules by class..." onkeyup="searchStudySchedules()">
+                    </div>
+                    <div style="overflow-x: auto;">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Class</th>
+                                    <th>Monday</th>
+                                    <th>Tuesday</th>
+                                    <th>Wednesday</th>
+                                    <th>Thursday</th>
+                                    <th>Friday</th>
+                                    <th>Saturday</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="studyScheduleTableBody">
+                                <!-- Study schedules will be loaded here -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="form-container">
+                    <h4>⚡ Quick Actions</h4>
+                    <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+                        <button class="btn-primary" onclick="applyScheduleToAllClasses()">📋 Apply to All Classes</button>
+                        <button class="btn-secondary" onclick="resetScheduleToDefault()">🔄 Reset to Default</button>
+                        <button class="btn-secondary" style="background: #27ae60;" onclick="exportSchedules()">📤 Export Schedules</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Student Login Section -->
+            <div id="studentLogin" class="dashboard-section">
+                <h3>🔐 Login as Student</h3>
+                <div class="student-login-section">
+                    <p><strong>🔓 Admin can login as any student to manage their account</strong></p>
+                    
+                    <div class="form-container" style="max-width: 600px; background: rgba(255,255,255,0.1);">
+                        <form id="adminStudentLoginForm">
+                            <div class="form-group">
+                                <label for="selectStudent" style="color: white;">👨‍🎓 Select Student:</label>
+                                <select id="selectStudent" required style="background: rgba(255,255,255,0.9);">
+                                    <option value="">Select a student</option>
+                                    <!-- Students will be loaded here -->
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="loginReason" style="color: white;">🎯 Reason for Login:</label>
+                                <select id="loginReason" required style="background: rgba(255,255,255,0.9);">
+                                    <option value="">Select reason</option>
+                                    <option value="update_info">📝 Update Student Information</option>
+                                    <option value="check_attendance">📊 Check/Update Attendance</option>
+                                    <option value="view_results">📈 View/Update Results</option>
+                                    <option value="troubleshoot">🔧 Troubleshoot Issues</option>
+                                    <option value="other">❓ Other</option>
+                                </select>
+                            </div>
+                            <button type="submit" class="btn-primary" style="background: #27ae60;">🚀 Login as Student</button>
+                        </form>
+                    </div>
+
+                    <div class="credentials-card" id="quickLoginInfo" style="display: none;">
+                        <h4 style="color: white;">⚡ Quick Student Login Info:</h4>
+                        <p><strong>Selected Student:</strong> <span id="selectedStudentName">-</span></p>
+                        <p><strong>Username:</strong> <span id="selectedStudentUsername">-</span></p>
+                        <p><strong>Password:</strong> <span id="selectedStudentPassword">-</span></p>
+                        <button class="btn-primary" onclick="quickLoginAsStudent()" style="background: #27ae60;">🎯 Quick Login</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Study Materials Section -->
+            <div id="materials" class="dashboard-section">
+                <h3>📚 Study Materials Management</h3>
+                
+                <div class="form-container">
+                    <h4>📤 Upload Study Material</h4>
+                    <form id="uploadMaterialForm">
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                            <div class="form-group">
+                                <label for="materialTitle">📝 Material Title:</label>
+                                <input type="text" id="materialTitle" required placeholder="e.g., Mathematics Notes Chapter 1">
+                            </div>
+                            <div class="form-group">
+                                <label for="materialSubject">📚 Subject:</label>
+                                <select id="materialSubject" required>
+                                    <option value="">Select Subject</option>
+                                    <option value="Mathematics">Mathematics</option>
+                                    <option value="Physics">Physics</option>
+                                    <option value="Chemistry">Chemistry</option>
+                                    <option value="Biology">Biology</option>
+                                    <option value="English">English</option>
+                                    <option value="Hindi">Hindi</option>
+                                    <option value="General">General</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                            <div class="form-group">
+                                <label for="materialClass">🏫 For Class:</label>
+                                <select id="materialClass" required>
+                                    <option value="All">All Classes</option>
+                                    <option value="9th">9th Grade</option>
+                                    <option value="10th">10th Grade</option>
+                                    <option value="11th Science">11th Science</option>
+                                    <option value="11th Commerce">11th Commerce</option>
+                                    <option value="12th Science">12th Science</option>
+                                    <option value="12th Commerce">12th Commerce</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="materialType">📄 Material Type:</label>
+                                <select id="materialType" required>
+                                    <option value="">Select Type</option>
+                                    <option value="Notes">📖 Notes</option>
+                                    <option value="PDF">📄 PDF</option>
+                                    <option value="Video">🎥 Video</option>
+                                    <option value="Assignment">📝 Assignment</option>
+                                    <option value="Practice Paper">📝 Practice Paper</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="materialDescription">📋 Description:</label>
+                            <textarea id="materialDescription" rows="3" placeholder="Brief description of the material..."></textarea>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="materialFile">📁 Upload File (Optional - for demo):</label>
+                            <input type="file" id="materialFile" accept=".pdf,.doc,.docx,.txt,.mp4,.jpg,.png">
+                            <small>For demo, we'll store file info. In real app, you'd upload to server.</small>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="materialLink">🔗 Or Provide Link:</label>
+                            <input type="url" id="materialLink" placeholder="https://drive.google.com/...">
+                        </div>
+                        
+                        <button type="submit" class="btn-primary">✅ Upload Material</button>
+                    </form>
+                </div>
+
+                <div class="table-container">
+                    <h4>📋 All Study Materials</h4>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1rem; margin-bottom: 1rem;">
+                        <select id="materialsFilterClass" onchange="loadStudyMaterials()">
+                            <option value="All">All Classes</option>
+                            <option value="9th">9th Grade</option>
+                            <option value="10th">10th Grade</option>
+                            <option value="11th Science">11th Science</option>
+                            <option value="11th Commerce">11th Commerce</option>
+                            <option value="12th Science">12th Science</option>
+                            <option value="12th Commerce">12th Commerce</option>
+                        </select>
+                        <select id="materialsFilterSubject" onchange="loadStudyMaterials()">
+                            <option value="All">All Subjects</option>
+                            <option value="Mathematics">Mathematics</option>
+                            <option value="Physics">Physics</option>
+                            <option value="Chemistry">Chemistry</option>
+                            <option value="Biology">Biology</option>
+                            <option value="English">English</option>
+                            <option value="Hindi">Hindi</option>
+                            <option value="General">General</option>
+                        </select>
+                        <select id="materialsFilterType" onchange="loadStudyMaterials()">
+                            <option value="All">All Types</option>
+                            <option value="Notes">Notes</option>
+                            <option value="PDF">PDF</option>
+                            <option value="Video">Video</option>
+                            <option value="Assignment">Assignment</option>
+                            <option value="Practice Paper">Practice Paper</option>
+                        </select>
+                    </div>
+                    <div style="overflow-x: auto;">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Title</th>
+                                    <th>Subject</th>
+                                    <th>Class</th>
+                                    <th>Type</th>
+                                    <th>Date</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="materialsTableBody">
+                                <!-- Study materials will be loaded here -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Reports Section -->
+            <div id="reports" class="dashboard-section">
+                <h3>📈 Reports & Analytics</h3>
+                
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <h4>📊 Students by Class</h4>
+                        <div id="classDistribution">
+                            <!-- Class distribution will be shown here -->
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <h4>📅 This Month's Activity</h4>
+                        <div id="recentActivity">
+                            <!-- Recent activity will be shown here -->
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="table-container">
+                    <h4>📋 Student Summary Report</h4>
+                    <div style="overflow-x: auto;">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Class</th>
+                                    <th>Total Students</th>
+                                    <th>Active</th>
+                                    <th>Attendance %</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody id="reportTableBody">
+                                <!-- Reports will be loaded here -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Login as Student Modal -->
+    <div id="studentLoginModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeStudentLoginModal()">&times;</span>
+            <h2>🔐 Login as Student</h2>
+            <div class="credentials-card" style="background: #f8f9fa; color: #333;">
+                <p>You are logging in as: <strong id="modalStudentName">-</strong></p>
+                <p>Username: <strong id="modalStudentUsername">-</strong></p>
+                <p>Class: <strong id="modalStudentClass">-</strong></p>
+                <p style="color: #e74c3c; font-weight: bold;">⚠️ You will have full access to this student's account</p>
+            </div>
+            <div class="modal-actions">
+                <button class="btn-primary" onclick="proceedStudentLogin()" style="background: #27ae60;">🚀 Proceed to Student Dashboard</button>
+                <button class="btn-secondary" onclick="closeStudentLoginModal()">❌ Cancel</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/admin.js"></script>
+</body>
+</html>
